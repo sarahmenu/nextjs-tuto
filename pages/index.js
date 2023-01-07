@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({posts}) {
@@ -24,13 +24,19 @@ export default function Home({posts}) {
       <h1 className={inter.className}>Bravo ! Vous êtes ici depuis {count} secondes :)</h1>
       <br></br>
       <ul>
-        {posts.map(post => <li>
-          <p className={inter.className}>{post.title}</p>
-        </li>)}
+        {posts.map(post =>
+          <li>
+            <Link href={`/blog/${post.id}`}>
+              <a>
+                <p className={inter.className}>{post.id} - {post.title}</p>
+              </a>
+            </Link>
+          </li>)}
       </ul>
     </>
   )
 }
+
 
 export async function getStaticProps () {
   const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=4/')
