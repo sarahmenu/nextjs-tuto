@@ -16,25 +16,23 @@ export default function Home({posts}) {
   }, [])
 
 
-  return (
-    <>
-      <Head>
-        <title> Mon premier projet Next</title>
-      </Head>
-      <h1 className={inter.className}>Bravo ! Vous êtes ici depuis {count} secondes :)</h1>
-      <br></br>
-      <ul>
-        {posts.map(post =>
-          <li>
-            <Link href={`/blog/${post.id}`}>
-              <a>
-                <p className={inter.className}>{post.id} - {post.title}</p>
-              </a>
-            </Link>
-          </li>)}
-      </ul>
-    </>
-  )
+  return <>
+    <Head>
+      <title> Mon premier projet Next</title>
+    </Head>
+    <h1 className={inter.className}>Bravo ! Vous êtes ici depuis {count} secondes :)</h1>
+    <br></br>
+    <ul>
+      {posts.map(post =>
+        <li>
+          <Link href={`/blog/${post.id}`}>
+
+            <p className={inter.className}>{post.id} - {post.title}</p>
+
+          </Link>
+        </li>)}
+    </ul>
+  </>;
 }
 
 
