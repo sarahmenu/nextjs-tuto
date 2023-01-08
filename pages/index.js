@@ -4,7 +4,7 @@ import { Inter } from '@next/font/google'
 import Link from 'next/link'
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({posts}) {
+export default function Home({posts, date}) {
 
   const [count, setCount] = useState(0)
 
@@ -15,11 +15,12 @@ export default function Home({posts}) {
     }
   }, [])
 
-
   return <>
     <Head>
       <title> Mon premier projet Next</title>
     </Head>
+    <h6 className={inter.className}> {date}</h6>
+    <br /> <br />
     <h1 className={inter.className}>Bravo ! Vous êtes ici depuis {count} secondes :)</h1>
     <br></br>
     <ul>
@@ -35,13 +36,14 @@ export default function Home({posts}) {
   </>;
 }
 
-
-export async function getServerSideProps () {
+export async function getStaticProps () {
   const posts = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=4/')
     .then(r => r.json())
   return {
     props: {
-      posts
-    }
+      posts,
+      date: (new Date()).toString()
+    },
+    revalidate: 5,
   }
 }
